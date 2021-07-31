@@ -141,6 +141,10 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
    */
   private static final int MAX_HASH_BUCKET_LENGTH = 9;
 
+  // See CompactHashMap for a detailed description of how the following fields work. That
+  // description talks about `keys`, `values`, and `entries`; here the `keys` and `values` arrays
+  // are replaced by a single `elements` array but everything else works similarly.
+
   /**
    * The hashtable object. This can be either:
    *
@@ -170,9 +174,9 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
    *
    * <pre>
    * hash  = aaaaaaaa
-   * mask  = 0000ffff
-   * next  = 0000bbbb
-   * entry = aaaabbbb
+   * mask  = 00000fff
+   * next  = 00000bbb
+   * entry = aaaaabbb
    * </pre>
    *
    * <p>The pointers in [size(), entries.length) are all "null" (UNSET).
